@@ -1,0 +1,29 @@
+.feed-image {
+  width: 100%;
+  height: 70vh; /* Adjust the height as needed */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)),
+  url("https://images.unsplash.com/photo-1690184432588-81068877d852");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.feed-image h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.feed-image p {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#gallery {
+  column-count: 3!important;
+}
