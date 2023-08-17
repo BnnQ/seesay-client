@@ -1,0 +1,134 @@
+.image-container .image-slide {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-image-container,
+.user-image-container img {
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.grid-container {
+  column-count: 3;
+  column-gap: 1rem;
+}
+
+.grid-item {
+  break-inside: avoid;
+  margin-bottom: 10px;
+}
+
+#gallery .col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square-button {
+  width: 31%;
+  height: 58px;
+  padding: 6px 11px;
+}
+
+.modal-dialog {
+  padding-top: 16px;
+  max-width: 89% !important;
+  margin: auto !important;
+}
+
+.modal-header {
+  border-bottom: none !important;
+}
+
+.modal-footer {
+  border-top: none !important;
+}
+
+.full-image {
+  max-height: 70vh !important;
+  width: auto;
+  max-width: 100%;
+}
+
+.modal .btn-close {
+  position: fixed;
+  top: 20px;
+  left: 10px;
+  z-index: 1050; /* ensures the button is above the modal */
+}
+
+.modal-backdrop {
+  opacity: 0.65 !important;
+}
+
+span.label {
+  font-size: 0.9rem;
+  color: rgb(157, 149, 136);
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+}
+.comment img {
+  margin-right: 10px;
+}
+.comment strong {
+  margin-right: 5px;
+}
+
+.avatar {
+  min-width: 40px;
+  max-width: 40px;
+
+  min-height: 40px;
+  max-height: 40px;
+
+  object-fit: cover;
+}
+
+.note-btn {
+  color: rgb(156, 156, 156);
+}
+
+.ql-toolbar,
+.ql-container {
+  border-color: #6c757d !important;
+}
+
+.ql-toolbar {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#comment-editor {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.ql-toolbar .ql-stroke {
+  fill: none;
+  stroke: lightgray;
+}
+
+.ql-toolbar .ql-fill {
+  fill: lightgray;
+  stroke: none;
+}
+
+.ql-toolbar .ql-picker {
+  color: lightgray;
+}
+
+.premium-post-badge {
+  top: 20px;
+  left: 20px;
+  background-color: #6c757d;
+  border-radius: 30px;
+  font-size: 15px;
+  padding: 3px 15px;
+  opacity: 0.7;
+}

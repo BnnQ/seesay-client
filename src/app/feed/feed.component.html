@@ -1,0 +1,313 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:svg="http://www.w3.org/2000/svg"
+>
+  <content-loader
+    *ngIf="!posts"
+    [animate]="true"
+    [speed]="1.5"
+    [interval]="0.3"
+    backgroundColor="rgb(24, 26, 27)"
+  >
+    <svg:rect x="0" y="0" rx="1" ry="1" width="100" height="250" />
+    <svg:rect x="150" y="0" rx="1" ry="1" width="100" height="250" />
+    <svg:rect x="300" y="0" rx="1" ry="1" width="100" height="250" />
+  </content-loader>
+  <div *ngIf="posts" id="gallery" class="grid-container">
+    <div
+      *ngFor="let post of posts"
+      class="grid-item col hoverable-image-container w-100"
+      data-bs-toggle="modal"
+      data-bs-target="#imageModal"
+      (click)="selectPost(post.id)"
+    >
+      <span
+        *ngIf="post.isPremium"
+        class="premium-post-badge bg-primary position-absolute"
+        >Premium</span
+      >
+      <img class="w-100 h-100" [src]="post.imagePath" alt="Community image" />
+      <div class="overlay d-flex align-items-center justify-content-center">
+        <p class="overlay-content text-light">{{ post.description }}</p>
+      </div>
+    </div>
+
+    <div
+      #modalHelper
+      class="d-none"
+      id="modal-helper"
+      data-bs-toggle="modal"
+      data-bs-target="#imageModal"
+    ></div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="imageModal"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel"
+      aria-hidden="true"
+      style="z-index: 99999"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div
+          class="modal-content text-light"
+          style="background-color: rgb(24, 26, 27) !important"
+        >
+          <div class="modal-header">
+            <div class="d-flex align-items-center">
+              <a
+                *ngIf="selectedPost && selectedPost.user"
+                [routerLink]="'user/' + selectedPost.user.userName"
+                (click)="closeModal()"
+              >
+                <img
+                  [src]="selectedPost.user.avatarImagePath"
+                  alt="Avatar"
+                  class="avatar rounded-circle me-2"
+                />
+              </a>
+              <h5
+                class="modal-title"
+                style="font-size: 15px"
+                id="imageModalLabel"
+              >
+                {{ selectedPost?.user?.firstName }}
+                {{ selectedPost?.user?.lastName }}
+              </h5>
+            </div>
+            <div class="d-flex align-items-center">
+              <a
+                class="badge-premium-subscriber-container-container me-2"
+                [routerLink]="ApplicationRoutes.premium"
+                (click)="closeModal()"
+                *ngIf="selectedPost?.isPremium"
+              >
+                <div class="badge-premium-subscriber-container">
+                  <div class="badge-premium-subscriber">Premium</div>
+                </div>
+              </a>
+              <div
+                *ngIf="
+                  (screenInfoService.currentScreenSize | async) !==
+                  ScreenSize.small
+                "
+              >
+                <button
+                  id="like-button"
+                  type="button"
+                  class="btn btn-outline-secondary btn-sm me-2"
+                  style="padding: 6px 11px"
+                  (click)="clickLike()"
+                >
+                  <fa-icon
+                    [icon]="
+                      (isCurrentUserLiked | async)
+                        ? faSolidHeart
+                        : faRegularHeart
+                    "
+                  ></fa-icon>
+                </button>
+                <button
+                  id="download-button"
+                  (click)="clickDownload()"
+                  type="button"
+                  [ngClass]="{
+                    btn: true,
+                    'btn-success': true,
+                    'me-2': true,
+                    disabled:
+                      selectedPost?.isPremium && !(isCurrentUserHasPremium | async)
+                  }"
+                >
+                  Download free
+                </button>
+                <button
+                  type="button"
+                  class="btn-close btn-close-white"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-body text-center">
+            <content-loader
+              *ngIf="!selectedPost"
+              [animate]="true"
+              [speed]="1.5"
+              [interval]="0.3"
+              backgroundColor="rgb(24, 26, 27)"
+            >
+              <svg:rect x="46" y="0" rx="1" ry="1" width="300" height="120" />
+            </content-loader>
+            <img
+              *ngIf="selectedPost"
+              [src]="selectedPost.imagePath"
+              alt="Full Image"
+              class="img-fluid full-image"
+            />
+          </div>
+          <div
+            class="modal-footer flex-column align-items-start flex-md-row justify-content-md-between"
+          >
+            <div class="d-flex gap-2 gap-md-5 flex-column flex-md-row">
+              <div>
+                <div><span class="label">Views</span></div>
+                <div>{{ selectedPost?.numberOfViews ?? 0 }}</div>
+              </div>
+              <div>
+                <div><span class="label">Likes</span></div>
+                <div>{{ selectedPost?.numberOfLikes ?? 0 }}</div>
+              </div>
+              <div>
+                <div><span class="label">Downloads</span></div>
+                <div>{{ selectedPost?.numberOfDownloads ?? 0 }}</div>
+              </div>
+            </div>
+            <ng-container
+              *ngIf="
+                (this.screenInfoService.currentScreenSize | async) !==
+                ScreenSize.small
+              "
+            >
+              <button
+                id="share-button"
+                (click)="clickShare()"
+                type="button"
+                class="btn btn-outline-secondary"
+              >
+                <fa-icon [icon]="faShare"></fa-icon>
+                <span *ngIf="!(isShared | async)"> Share</span>
+                <span *ngIf="isShared | async"> Copied!</span>
+              </button>
+            </ng-container>
+          </div>
+
+          <!-- Like, Download, and Share buttons for small screens -->
+          <ng-container
+            *ngIf="
+              (screenInfoService.currentScreenSize | async) === ScreenSize.small
+            "
+          >
+            <div
+              id="#like-download-container"
+              class="d-flex justify-content-between px-3 pb-3 align-items-center flex-wrap gap-2"
+            >
+              <!-- Like button -->
+              <button
+                id="#like-button"
+                type="button"
+                class="btn btn-outline-secondary square-button btn-lg"
+              >
+                <fa-icon [icon]="faSolidHeart"></fa-icon>
+              </button>
+
+              <!-- Download button -->
+              <button
+                id="#download-button"
+                (click)="clickDownload()"
+                type="button"
+                class="btn btn-outline-secondary square-button btn-lg"
+                [ngClass]="{
+                  btn: true,
+                  'btn-outline-secondary': true,
+                  'square-button': true,
+                  'btn-lg': true,
+                  disabled: selectedPost?.isPremium && !isCurrentUserHasPremium
+                }"
+              >
+                <fa-icon [icon]="faDownload"></fa-icon>
+              </button>
+
+              <!-- Share button -->
+              <button
+                id="share-button-big"
+                (click)="clickShare()"
+                type="button"
+                class="btn btn-outline-secondary square-button btn-lg"
+              >
+                <fa-icon *ngIf="!(isShared | async)" [icon]="faShare" />
+                <div *ngIf="isShared | async">
+                  <fa-icon [icon]="faCheck" />
+                  Copied!
+                </div>
+              </button>
+            </div>
+          </ng-container>
+
+          <!-- End of Like, Download, and Share buttons for small screens -->
+
+          <!-- Rest of the modal content -->
+          <div class="px-3 pb-3 text-start">
+            <p *ngIf="selectedPost" class="text-muted small mb-1">
+              <fa-icon [icon]="faCalendar" />
+              {{ selectedPost.createdAt | timeAgo }}
+            </p>
+            <div *ngIf="selectedPost" class="d-flex flex-wrap gap-1 mb-2">
+              <!-- Badges -->
+              <a
+                *ngFor="let category of selectedPost.categories"
+                [href]="'/category/' + category.id"
+                ><span class="badge me-1" (click)="closeModal()">{{
+                  category.name
+                }}</span></a
+              >
+            </div>
+            <h4>Comments:</h4>
+            <div
+              *ngIf="selectedPost?.comments"
+              class="pt-1 d-flex flex-column gap-3"
+            >
+              <div
+                *ngFor="let comment of selectedPost!.comments"
+                class="comment"
+              >
+                <img
+                  *ngIf="comment.user"
+                  [src]="comment.user.avatarImagePath"
+                  alt="Avatar"
+                  class="avatar rounded-circle me-2"
+                />
+                <div *ngIf="comment.user">
+                  <strong
+                    >{{
+                      comment.user.firstName !== null
+                        ? comment.user.firstName + " " + comment.user.lastName
+                        : comment.user.userName
+                    }}&colon;</strong
+                  ><br />
+                  <div [innerHTML]="comment.text"></div>
+                </div>
+              </div>
+              <div
+                *ngIf="(selectedPost?.comments?.length ?? 0) < 1"
+                class="text-secondary"
+              >
+                There are currently no comments. Be the first!
+              </div>
+            </div>
+
+            <form (submit)="addComment()" class="pt-4">
+              <ckeditor
+                [editor]="Editor"
+                name="editorContent"
+                [(ngModel)]="editorContent"
+              ></ckeditor>
+              <div class="pt-3">
+                <button
+                  type="submit"
+                  class="btn btn-outline-secondary"
+                  style="width: 200px"
+                >
+                  <fa-icon [icon]="faComment" />
+                  Add comment
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</html>
