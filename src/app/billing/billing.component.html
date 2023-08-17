@@ -1,0 +1,66 @@
+<div id="body" class="container" style="max-width: 800px">
+  <div
+    class="row justify-content-center align-items-center"
+    style="min-height: 90vh"
+  >
+    <div class="col-12">
+      <h4>Pay with card</h4>
+      <form class="form">
+        <div class="form-group mb-2">
+          <label class="form-label text-secondary">Card information</label>
+          <input
+            type="text"
+            placeholder="1234 1234 1234 1234"
+            name="cardNumber"
+            [(ngModel)]="cardNumber"
+            class="form-control mb-3"
+          />
+          <input
+            placeholder="MM"
+            type="number"
+            name="expirationMonth"
+            [(ngModel)]="expirationMonth"
+            class="form-control mb-3"
+          />
+          <input
+            type="number"
+            placeholder="YYYY"
+            name="expirationYear"
+            [(ngModel)]="expirationYear"
+            class="form-control mb-3"
+          />
+          <input
+            type="number"
+            placeholder="CVV"
+            name="cvc"
+            class="form-control mb-3"
+            [(ngModel)]="cvv"
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label text-secondary" for="cardHolderName"
+            >Name on card</label
+          >
+          <input
+            type="text"
+            id="cardHolderName"
+            name="cardHolderName"
+            class="form-control"
+            [(ngModel)]="cardHolderName"
+          />
+        </div>
+      </form>
+      <div class="d-flex justify-content-between">
+        <p>Total due</p>
+        <p>$10.00</p>
+      </div>
+
+      <div *ngIf="errorMessage" class="text-danger">Error: {{errorMessage}}</div>
+      <a
+        class="btn btn-primary fw-bold mt-2 pb-1 px-5 w-100 py-2"
+        (click)="buy()"
+        >Buy</a
+      >
+    </div>
+  </div>
+</div>
