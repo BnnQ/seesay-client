@@ -1,0 +1,259 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:svg="http://www.w3.org/2000/svg"
+>
+  <!-- Header -->
+  <div id="body" class="container-fluid">
+    <content-loader
+      *ngIf="!this.user"
+      [animate]="true"
+      [speed]="1.5"
+      [interval]="0.3"
+      backgroundColor="rgb(24, 26, 27)"
+    >
+      <svg:rect x="127" y="0" rx="90" ry="90" width="35" height="35" />
+      <svg:rect x="175" y="0" rx="1" ry="1" width="60" height="10" />
+      <svg:rect x="175" y="15" rx="1" ry="1" width="30" height="7" />
+      <svg:rect x="175" y="27" rx="1" ry="1" width="35" height="7" />
+    </content-loader>
+    <div
+      *ngIf="this.user"
+      class="row justify-content-center align-items-center"
+      style="margin: auto; max-width: 50%; min-width: 600px"
+    >
+      <div class="col-4 d-flex justify-content-end">
+        <img
+          [src]="this.user.avatarImagePath"
+          alt="Profile picture"
+          class="profile-pic"
+          style="width: 150px; height: 150px"
+        />
+      </div>
+      <div class="col-8" style="height: 150px">
+        <h1>{{ this.user.firstName }} {{ this.user.lastName }}</h1>
+        <div *ngIf="this.user.bio">
+          {{ this.user.bio }}
+        </div>
+        <div
+          *ngIf="this.user.hasPremium"
+          class="badge-premium-subscriber-container-container mt-2"
+        >
+          <div class="badge-premium-subscriber-container">
+            <div class="badge-premium-subscriber">Subscriber</div>
+          </div>
+        </div>
+        <div *ngIf="this.user.location" class="mt-2 text-secondary">
+          <fa-icon [icon]="faMapMarkerAlt" />
+          <i class="fas fa-map-marker-alt"></i>
+          {{ this.user.location }}
+        </div>
+        <div
+          *ngIf="(this.user.socialMediaLinks?.length ?? 0) > 0"
+          class="dropdown"
+        >
+          <button
+            class="btn btn-link dropdown-toggle text-decoration-none px-0"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <fa-icon [icon]="faLink" />
+            Connect with {{ this.user.firstName }}
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a
+                class="dropdown-item"
+                *ngFor="let link of this.user.socialMediaLinks"
+                [href]="link.link"
+                >{{ link.link }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="this.user.id === currentUserId" class="mt-2">
+          <button
+            class="btn btn-outline-secondary"
+            data-bs-toggle="modal"
+            data-bs-target="#profileModal"
+          >
+            Edit profile
+          </button>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="container-fluid" style="margin-top: 125px">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12 text-center">
+            <ul class="nav justify-content-start mb-3">
+              <li
+                [ngClass]="{
+                  active: (selectedMenuItem | async) === MenuItem.photos,
+                  'nav-item': true,
+                  'menu-item': true,
+                  'text-light': true
+                }"
+                (click)="selectPhotos()"
+              >
+                <fa-icon [icon]="faImage" />
+                Photos {{ this.numberOfPosts | formatted }}
+              </li>
+              <li
+                [ngClass]="{
+                  active: (selectedMenuItem | async) === MenuItem.likes,
+                  'nav-item': true,
+                  'menu-item': true,
+                  'text-light': true
+                }"
+                (click)="selectLikes()"
+              >
+                <fa-icon [icon]="faHeart" />
+                Likes {{ this.numberOfLikes | formatted }}
+              </li>
+            </ul>
+            <app-feed [posts]="posts" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    #modalHelper
+    class="d-none"
+    id="modal-helper"
+    data-bs-toggle="modal"
+    data-bs-target="#profileModal"
+  ></div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="profileModal"
+    tabindex="-1"
+    aria-labelledby="imageModalLabel"
+    aria-hidden="true"
+    style="z-index: 99999"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <form
+        enctype="multipart/form-data"
+        (submit)="editProfile()"
+        class="modal-content text-light"
+        style="background-color: rgb(24, 26, 27) !important"
+      >
+        <div class="modal-header">Edit profile</div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label class="form-label" for="firstName">First name</label>
+                <input
+                  [(ngModel)]="firstName"
+                  name="firstName"
+                  id="firstName"
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label class="form-label" for="lastName">Last name</label>
+                <input
+                  [(ngModel)]="lastName"
+                  name="lastName"
+                  id="lastName"
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group">
+              <label class="form-label" for="location">Location</label>
+              <input
+                [(ngModel)]="location"
+                name="location"
+                id="location"
+                type="text"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group">
+              <label class="form-label" for="bio">Bio</label>
+              <input
+                [(ngModel)]="bio"
+                name="bio"
+                id="bio"
+                type="text"
+                class="form-control"
+                placeholder="Tell us about you in a nutshell..."
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group">
+              <label class="form-label" for="socialMediaLinks"
+                >Social media links</label
+              >
+              <input
+                name="socialMediaLinks"
+                id="socialMediaLinks"
+                type="text"
+                class="form-control"
+                [(ngModel)]="linkInput"
+                (keyup)="onKeyUp($event)"
+                (focusout)="onFocusOut()"
+              />
+              <div class="mt-2 d-flex flex-wrap gap-2">
+                <div *ngFor="let socialMediaLink of socialMediaLinks">
+                  <span class="badge"
+                    >{{ socialMediaLink.link }}
+                    <button
+                      class="btn btn-sm border-0"
+                      (click)="removeLink(socialMediaLink)"
+                    >
+                      x
+                    </button></span
+                  >
+                </div>
+              </div>
+              <div *ngIf="socialMediaLinks.length < 1" class="notice mt-2">
+                You can add several social media links - just listing them
+                separated by commas
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group">
+              <label for="avatar" class="mb-1">New avatar</label>
+              <input
+                type="file"
+                class="form-control"
+                id="avatar"
+                name="avatar"
+                (change)="onFileChange($event)"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              class="btn btn-primary text-nowrap fw-bold w-100"
+              style="border-radius: 2px; padding: 7px 0; font-size: 18px"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</html>
