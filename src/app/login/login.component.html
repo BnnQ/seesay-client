@@ -1,0 +1,56 @@
+<div id="body" class="d-flex flex-column align-items-center justify-content-center min-vh-100">
+  <div id="form-wrapper" class="container-fluid">
+    <div class="text-center">
+      <h1 class="fw-bold mb-4" style="font-size: 35px">Login</h1>
+      <h2 class="mb-4" style="font-size: 20px">Welcome back</h2>
+    </div>
+
+    <div class="pb-3 text-center">
+      <a [routerLink]="ApplicationRoutes.register" class="btn btn-primary btn-block create-btn">
+        <fa-icon [icon]="faUserPlus"/>
+        Join
+      </a>
+    </div>
+    <div class="or">
+      <div class="or-line"></div>
+      <div class="or-or">
+        <span>OR</span>
+      </div>
+    </div>
+
+    <form method="POST" (submit)="submitLogin()">
+      <div class="form-group mb-1">
+        <label class="form-label" for="username"></label>
+        <input name="username" id="username" type="text" class="form-control"
+               placeholder="Username" [(ngModel)]="username"/>
+      </div>
+      <div class="form-group mb-4">
+        <label class="form-label" for="password"></label>
+        <input name="password" id="password" type="password" class="form-control"
+               placeholder="••••••••" [(ngModel)]="password"/>
+      </div>
+      <div>
+        <div *ngIf="this.errorMessage" class="text-danger">Error: {{this.errorMessage}}</div>
+        <button type="submit" class="btn btn-primary text-nowrap fw-bold w-100" style="border-radius: 2px; padding: 7px 0;  font-size: 18px">
+          Login
+        </button>
+      </div>
+    </form>
+
+    <div id="external-login-providers-container" class="d-flex flex-column gap-2 mt-5">
+      <button (click)="externalLogin('Google')"
+         class="btn btn-outline-danger d-flex justify-content-center align-items-center fw-bold"
+         style="font-size: 18px">
+        <fa-icon [icon]="faGoogle" class="me-3"/>
+        Login via Google
+      </button>
+      <button (click)="externalLogin('GitHub')"
+         class="btn btn-outline-secondary d-flex justify-content-center align-items-center fw-bold mt-1"
+         style="font-size: 18px">
+        <fa-icon [icon]="faGithub" class="me-3"/>
+        Login via GitHub
+      </button>
+    </div>
+
+  </div>
+</div>
