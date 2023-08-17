@@ -1,0 +1,11 @@
+<div id="body" class="container p-0">
+  <div class="row">
+    <p class="fs-3 fw-bold">Category "{{this.category?.name}}"</p>
+  </div>
+  <div class="row pt-5" style="margin: auto; max-width: 1320px">
+    <div class="col">
+      <app-feed *ngIf="posts" [posts]="posts"></app-feed>
+      <div *ngIf="posts && posts.length < 1" class="text-center">No results found!</div>
+    </div>
+  </div>
+</div>
