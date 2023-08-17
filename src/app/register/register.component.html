@@ -1,0 +1,161 @@
+<div id="body" class="container-fluid p-0">
+  <div class="row">
+    <div class="col-md-4 col-12 image-container">
+      <div class="image">
+        <div class="text">
+          <span class="fs-3 fw-bold">Creation starts here</span>
+          <br />
+          Access 5,153,037 free, high-resolution photos you can't find anywhere
+          else.
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-8 col-12 d-flex justify-content-center align-items-center"
+    >
+      <div id="form-wrapper" class="container-fluid">
+        <div class="text-center">
+          <h1 class="fw-bold mb-4" style="font-size: 35px">Join SeeSay</h1>
+          <h2 class="mb-4 label-sm fs-5 text-light-gray">
+            Already have an account?
+            <a
+              [routerLink]="ApplicationRoutes.login"
+              class="d-inline btn-link text-secondary"
+              >Login
+            </a>
+          </h2>
+        </div>
+
+        <div
+          id="external-login-providers-container"
+          class="d-flex flex-column gap-2 mt-4"
+        >
+          <a
+            (click)="userManager.externalLogin('Google')"
+            class="btn btn-outline-danger d-flex justify-content-center align-items-center fw-bold"
+            style="font-size: 18px"
+          >
+            <fa-icon [icon]="faGoogle" class="me-3" />
+            Join with Google
+          </a>
+          <a
+            (click)="userManager.externalLogin('GitHub')"
+            class="btn btn-outline-secondary d-flex justify-content-center align-items-center fw-bold"
+            style="font-size: 18px"
+          >
+            <fa-icon [icon]="faGithub" class="me-3" />
+            Join with GitHub
+          </a>
+        </div>
+        <div class="or">
+          <div class="or-line"></div>
+          <div class="or-or">
+            <span>OR</span>
+          </div>
+        </div>
+
+        <form method="POST" (submit)="register()">
+          <div class="row mb-3">
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label class="form-label" for="firstName">First name</label>
+                <input
+                  [(ngModel)]="firstName"
+                  name="firstName"
+                  id="firstName"
+                  type="text"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label class="form-label" for="lastName">Last name</label>
+                <input
+                  [(ngModel)]="lastName"
+                  name="lastName"
+                  id="lastName"
+                  type="text"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input
+                [(ngModel)]="email"
+                name="email"
+                id="email"
+                type="email"
+                class="form-control"
+                placeholder="example@mail.com"
+                required
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group">
+              <label class="form-label" for="username">Username</label>
+              <input
+                [(ngModel)]="username"
+                name="username"
+                id="username"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group">
+              <label class="form-label" for="password">Password</label>
+              <input
+                [(ngModel)]="password"
+                name="password"
+                id="password"
+                type="password"
+                class="form-control"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="form-group">
+              <label class="form-label" for="confirmPassword"
+                >Confirm password</label
+              >
+              <input
+                [(ngModel)]="confirmPassword"
+                name="confirmPassword"
+                id="confirmPassword"
+                type="password"
+                class="form-control"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <div *ngIf="errorMessage" class="text-danger">
+              Error: {{ errorMessage }}
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary text-nowrap fw-bold w-100"
+              style="border-radius: 2px; padding: 7px 0; font-size: 18px"
+            >
+              Join
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
