@@ -1,0 +1,296 @@
+@import "customBootstrap";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+header {
+  background-color: $dark !important;
+  color: rgb(221, 218, 214);
+  font-family: -apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue,
+    Helvetica, Ubuntu, Roboto, Noto, Segoe UI, Arial, sans-serif !important;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  padding: 10px;
+  align-items: center;
+  height: $header-height;
+
+  display: grid;
+  grid-template-columns: 60px auto 300px;
+}
+
+/* .vertical-line {
+  width: 2px;
+  height: 32px;
+  background-color: rgb(50, 54, 56);
+  margin-right: 10px;
+  align-self: center;
+} */
+
+.login-link {
+  margin-left: auto;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="file"],
+select,
+.ngx-dropdown-button,
+.ngx-dropdown-list-container {
+  background-color: rgb(34, 36, 38) !important;
+  border-color: rgb(101, 94, 83) !important;
+  color: rgb(221, 218, 214) !important;
+
+  &::placeholder {
+    color: rgb(221, 218, 214) !important;
+  }
+}
+
+.search-bar {
+  background-color: rgb(34, 36, 38) !important;
+  color: rgb(221, 218, 214) !important;
+  border: none;
+  border-radius: 25px;
+  padding-left: 50px;
+  height: 40px !important;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.search-bar.big {
+  height: 50px !important;
+}
+
+.search-bar.squared {
+  border-radius: 0 !important;
+}
+
+.search-bar:focus {
+  background-color: rgb(24, 26, 27) !important;
+  box-shadow: none !important;
+
+  border: 1px rgb(61, 66, 69) solid;
+}
+
+.search-bar::placeholder {
+  color: rgb(79, 79, 79) !important;
+}
+
+.fa-search {
+  color: rgb(130, 130, 130) !important;
+}
+
+.search-bar:focus {
+  outline: none;
+}
+
+.search-bar::placeholder {
+  color: darkgray;
+}
+
+.search-container fa-icon {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.text-muted {
+  color: gray !important;
+}
+
+.available-item,
+.search-container > input {
+  color: rgb(221, 218, 214) !important;
+}
+
+.notice {
+  background: $gray-800;
+  color: $light;
+  font-size: 12px;
+  padding: 5px 6px 4px;
+  border-radius: 2px;
+  margin-top: 8px;
+  font-weight: $font-weight-bold;
+}
+
+.badge-premium-subscriber {
+  background-image: linear-gradient(-15deg, rgb(0, 179, 204), rgb(200, 0, 204));
+  background-color: initial;
+  color: rgba(232, 230, 227, 0);
+}
+
+.badge-premium-subscriber {
+  background: linear-gradient(-15deg, #00e0ff, #fa00ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #0000;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.badge-premium-subscriber-container {
+  background-color: rgb(24, 26, 27);
+  border-radius: 1px;
+  padding: 4px 8px;
+}
+
+.badge-premium-subscriber-container-container {
+  background-image: linear-gradient(-15deg, rgb(0, 179, 204), rgb(200, 0, 204));
+  background-color: initial;
+  background: linear-gradient(-15deg, #00e0ff, #fa00ff);
+  border-radius: 2px;
+  padding: 1px;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-decoration: none;
+}
+.premium-text {
+  display: inline-block;
+  background: linear-gradient(-15deg, #00e0ff, #fa00ff);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.badge {
+  background-color: rgb(34, 36, 38) !important;
+  color: rgb(157, 149, 136) !important;
+  border-radius: 0;
+}
+
+.badge:hover {
+  background-color: rgb(41, 44, 46) !important;
+  color: rgb(221, 218, 214) !important;
+  transition: all 0.2s ease-in-out;
+}
+
+:root {
+  /* Overrides the border radius setting in the theme. */
+  --ck-border-radius: 4px;
+
+  /* Overrides the default font size in the theme. */
+  --ck-font-size-base: 14px;
+
+  /* Helper variables to avoid duplication in the colors. */
+  --ck-custom-background: black !important;
+  --ck-custom-foreground: black !important;
+  --ck-custom-border: rgb(101, 94, 83) !important;
+  --ck-custom-white: white !important;
+
+  /* -- Overrides generic colors. ------------------------------------------------------------- */
+
+  --ck-color-base-foreground: var(--ck-custom-background);
+  --ck-color-focus-border: hsl(208, 90%, 62%);
+  --ck-color-text: hsl(0, 0%, 75%) !important;
+  --ck-color-shadow-drop: hsla(0, 0%, 0%, 0.2);
+  --ck-color-shadow-inner: hsla(0, 0%, 0%, 0.1);
+  --ck-color-base-border: rgb(101, 94, 83) !important;
+
+  /* -- Overrides the default .ck-button class colors. ---------------------------------------- */
+
+  --ck-color-button-default-background: var(--ck-custom-background);
+  --ck-color-button-default-hover-background: rgb(100, 100, 100) !important;
+  --ck-color-button-default-active-background: rgb(63, 63, 63) !important;
+  --ck-color-button-default-active-shadow: hsl(270, 2%, 23%);
+  --ck-color-button-default-disabled-background: var(--ck-custom-background);
+
+  --ck-color-button-on-background: var(--ck-custom-foreground);
+  --ck-color-button-on-hover-background: rgb(100, 100, 100) !important;
+  --ck-color-button-on-active-background: rgb(100, 100, 100) !important;
+  --ck-color-button-on-active-shadow: hsl(240, 3%, 19%);
+  --ck-color-button-on-disabled-background: var(--ck-custom-foreground);
+
+  --ck-color-button-action-background: rgb(100, 100, 100) !important;
+  --ck-color-button-action-hover-background: hsl(168, 76%, 38%);
+  --ck-color-button-action-active-background: hsl(168, 76%, 36%);
+  --ck-color-button-action-active-shadow: hsl(168, 75%, 34%);
+  --ck-color-button-action-disabled-background: hsl(168, 76%, 42%);
+  --ck-color-button-action-text: rgb(100, 100, 100) !important;
+
+  --ck-color-button-save: hsl(120, 100%, 46%);
+  --ck-color-button-cancel: hsl(15, 100%, 56%);
+
+  /* -- Overrides the default .ck-dropdown class colors. -------------------------------------- */
+
+  --ck-color-dropdown-panel-background: var(--ck-custom-background);
+  --ck-color-dropdown-panel-border: var(--ck-custom-foreground);
+
+  /* -- Overrides the default .ck-splitbutton class colors. ----------------------------------- */
+
+  --ck-color-split-button-hover-background: var(
+    --ck-color-button-default-hover-background
+  );
+  --ck-color-split-button-hover-border: rgb(100, 100, 100) !important;
+
+  /* -- Overrides the default .ck-input class colors. ----------------------------------------- */
+
+  --ck-color-input-background: var(--ck-custom-background);
+  --ck-color-input-border: hsl(257, 3%, 43%);
+  --ck-color-input-text: hsl(0, 0%, 98%) !important;
+  --ck-color-input-disabled-background: hsl(255, 4%, 21%);
+  --ck-color-input-disabled-border: hsl(250, 3%, 38%);
+  --ck-color-input-disabled-text: hsl(0, 0%, 78%);
+
+  /* -- Overrides the default .ck-labeled-field-view class colors. ---------------------------- */
+
+  --ck-color-labeled-field-label-background: var(--ck-custom-background);
+
+  /* -- Overrides the default .ck-list class colors. ------------------------------------------ */
+
+  --ck-color-list-background: var(--ck-custom-background);
+  --ck-color-list-button-hover-background: var(--ck-color-base-foreground);
+  --ck-color-list-button-on-background: var(--ck-color-base-active);
+  --ck-color-list-button-on-background-focus: var(--ck-color-base-active-focus);
+  --ck-color-list-button-on-text: var(--ck-color-base-background);
+
+  /* -- Overrides the default .ck-balloon-panel class colors. --------------------------------- */
+
+  --ck-color-panel-background: var(--ck-custom-background);
+  --ck-color-panel-border: var(--ck-custom-border);
+
+  /* -- Overrides the default .ck-toolbar class colors. --------------------------------------- */
+
+  --ck-color-toolbar-background: rgba(42, 42, 42, 0.5) !important;
+  --ck-color-toolbar-border: var(--ck-custom-border) !important;
+
+  /* -- Overrides the default .ck-tooltip class colors. --------------------------------------- */
+
+  --ck-color-tooltip-background: hsl(252, 7%, 14%);
+  --ck-color-tooltip-text: hsl(0, 0%, 93%);
+
+  /* -- Overrides the default colors used by the ckeditor5-image package. --------------------- */
+
+  --ck-color-image-caption-background: hsl(0, 0%, 97%);
+  --ck-color-image-caption-text: hsl(0, 0%, 20%);
+
+  /* -- Overrides the default colors used by the ckeditor5-widget package. -------------------- */
+
+  --ck-color-widget-blurred-border: hsl(0, 0%, 87%);
+  --ck-color-widget-hover-border: hsl(43, 100%, 68%);
+  --ck-color-widget-editable-focus-background: var(--ck-custom-white);
+
+  /* -- Overrides the default colors used by the ckeditor5-link package. ---------------------- */
+
+  --ck-color-link-default: hsl(190, 100%, 75%);
+}
+
+.ck-content {
+  background: $dark !important;
+}
