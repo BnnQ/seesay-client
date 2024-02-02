@@ -1,27 +1,22 @@
-# SeesayClient
+# Description
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+SeeSay is a web-based platform for the distribution and sale of images. It's a place where photographers can share their creativity, and users can search and purchase unique images for their needs.
 
-## Development server
+The [server-side](https://github.com/BnnQ/SeeSay) of SeeSay is written in **ASP.NET Core 7** (Web API), providing reliability and performance. The use of [microservices](https://github.com/BnnQ/SeeSayMicroservices) (**Azure Functions** written in .NET Core) allows for flexible scaling and optimization of various aspects of the platform. The client-side of the website is built with **Angular 16**, a popular and robust framework for creating dynamic and responsive web applications.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This combination of technologies makes SeeSay a powerful platform for both photographers and image seekers, offering a wide range of features and a user-friendly interface.
 
-## Code scaffolding
+# Screenshots
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![image2](https://github.com/BnnQ/SeeSay/assets/115489239/b92f726a-7afc-46c1-aee4-369feccb2e4b)
+![image4](https://github.com/BnnQ/SeeSay/assets/115489239/f81d4e1c-5b68-4ef6-bed0-fc773d01ac56)
+![image5](https://github.com/BnnQ/SeeSay/assets/115489239/be1308cb-63d1-42a7-93a9-62b4fe420fc8)
+![image6](https://github.com/BnnQ/SeeSay/assets/115489239/b6f1efe2-9709-4c2f-8d88-bbfd2f957136)
+![image7](https://github.com/BnnQ/SeeSay/assets/115489239/275ff2da-5fd3-4292-86e3-829953c0dd4e)
+![image8](https://github.com/BnnQ/SeeSay/assets/115489239/caa86ddd-726a-41ad-ae9f-7747e17010fa)
+![image9](https://github.com/BnnQ/SeeSay/assets/115489239/ca0f800f-e9bc-4037-afed-0a2f4c67de65)
+![image10](https://github.com/BnnQ/SeeSay/assets/115489239/5ee0b4cb-067d-4341-a13c-0f494d40a7b4)
+![image11](https://github.com/BnnQ/SeeSay/assets/115489239/c61e4cda-b1be-43f3-807d-fe5d9e0d287c)
+![image12](https://github.com/BnnQ/SeeSay/assets/115489239/c8ad7025-7fd1-445b-8bf8-272a6f4bc51d)
+![image13](https://github.com/BnnQ/SeeSay/assets/115489239/b8ade8ee-beaa-4229-80f9-ef36b1ed4caf)
+![image14](https://github.com/BnnQ/SeeSay/assets/115489239/23db0eb1-0465-4658-8339-c997a0b85bb6)
